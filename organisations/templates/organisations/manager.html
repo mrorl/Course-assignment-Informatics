@@ -1,0 +1,92 @@
+{% extends 'organisations\baselogin.html' %}
+
+{% block content %}
+
+    <form id="f" method="post" action="add_employee" align="center">
+        {% csrf_token %}
+        <a class="navbar navbar-light" style="background-color: rgba(235,205,169,1)">Добавление сотрудника</a>
+        <select name="1" class="form-control" align="center">
+            {% for org in orgs %}
+                <option value={{ org.name }}>{{ org.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" class="form-control" name="number" placeholder="Идентификационный номер">
+        <input type="text" class="form-control" name="last_name" placeholder="Фамилия">
+        <input type="text" class="form-control" name="first_name" placeholder="Имя">
+        <input type="text" class="form-control" name="patronymic" placeholder="Отчество">
+        <input type="date" class="form-control" name="bday" placeholder="Дата рождения">
+        <input type="text" class="form-control" name="inn" placeholder="ИНН">
+        <input type="text" class="form-control" name="degree" placeholder="Образование">
+        <input type="text" class="form-control" name="adress" placeholder="Адрес">
+        <input type="tel" class="form-control" name="phone" placeholder="Номер телефона">
+        <input type="text" class="form-control" name="snils" placeholder="СНИЛС">
+        <input type="text" class="form-control" name="passport_num" placeholder="Номер паспорта">
+        <input type="date" class="form-control" name="passport_date" placeholder="Дата выдачи паспорта">
+        <button type="submit" class="btn btn-dark">Добавить</button>
+    </form>
+
+    <br style="line-height: 3px;"/>
+
+    {% for i in orgs %}
+        <form id="f" method="post" action="add_vacation" align="center">
+            {% csrf_token %}
+            <a class="navbar navbar-light" style="background-color: rgba(235,205,169,1)">Добавление отпуска</a>
+            <select name="vacation" class="form-control" align="center">
+                    <option value={{ i.name }}>{{ i.name }}</option>
+            </select>
+            <select name="name" class="form-control" align="center">
+                {% for employ in i.employees %}
+                    <option value={{ employ.last_name }}>{{ employ.last_name }}</option>
+                {% endfor %}
+            </select>
+            <input type="date" class="form-control" name="fday" placeholder="Начало отпуска">
+            <input type="date" class="form-control" name="lday" placeholder="Конец отпуска">
+            <input type="text" class="form-control" name="absence_type" placeholder="Тип отпуска">
+            <input type="text" class="form-control" name="status" placeholder="Статус">
+            <button type="submit" class="btn btn-dark">Добавить</button>
+        </form>
+
+        <br style="line-height: 3px;"/>
+
+    {% endfor %}
+
+    <br style="line-height: 3px;"/>
+
+    <form id="f" method="post" action="delete_empl" align="center">
+        {% csrf_token %}
+        <a class="navbar navbar-light" style="background-color: rgba(235,205,169,1)">Удаление сотрудников организации</a>
+        <select name="1" class="form-control" align="center">
+            {% for org in orgs %}
+                <option value={{ org.name }}>{{ org.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" class="form-control" name="lnameempl" placeholder="Введите фамилию сотрудника">
+        <input type="text" class="form-control" name="fnameempl" placeholder="Введите имя сотрудника">
+        <input type="text" class="form-control" name="patrempl" placeholder="Введите отчество сотрудника">
+        <button type="submit" class="btn btn-dark">Удалить</button>
+    </form>
+
+    <br style="line-height: 3px;"/>
+
+    {% for i in orgs %}
+
+        <form id="f" method="post" action="delete_vac" align="center">
+            {% csrf_token %}
+             <a class="navbar navbar-light" style="background-color: rgba(235,205,169,1)">Удаление отпуска сотрудника организации</a>
+            <select name="1" class="form-control" align="center">
+                    <option value={{ i.name }}>{{ i.name }}</option>
+            </select>
+            <select name="name" class="form-control" align="center">
+                {% for employ in i.employees %}
+                    <option value={{ employ.last_name }}>{{ employ.last_name }}</option>
+                {% endfor %}
+            </select>
+        <input type="date" class="form-control" name="deletevac" placeholder="Введите дату начала отпуска">
+        <button type="submit" class="btn btn-dark">Удалить</button>
+        </form>
+
+        <br style="line-height: 3px;"/>
+
+    {% endfor %}
+
+{% endblock %}

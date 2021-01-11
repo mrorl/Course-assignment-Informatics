@@ -1,0 +1,58 @@
+{% extends 'organisations\base.html' %}
+
+{% block title %}
+    Employees list
+{% endblock %}
+
+{% block content %}
+<table class="table table-light table-hover table-bordered">
+  <nav class="navbar" style="background-color: black; opacity: 0.6;">
+  <h2 style="color: white;"><i>Список сотрудников организации</i></h2>
+  </nav>
+  <thead class="table-light" style="background-color: rgba(235,205,169,0.51)">
+    <tr align="left">
+      <th scope="col">#</th>
+      <th scope="col">Фамилия</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Отчество</th>
+      <th scope="col">Дата рождения</th>
+      <th scope="col">ИНН</th>
+      <th scope="col">Образование</th>
+      <th scope="col">Адрес</th>
+      <th scope="col">Телефон</th>
+      <th scope="col">СНИЛС</th>
+      <th scope="col">Серия, номер паспорта</th>
+      <th scope="col">Дата выдачи паспорта</th>
+      <th scope="col">Отпуск</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for employee in org.employees %}
+    <tr>
+      <th scope="row" href="#">{{employee.number}}</th>
+      <td>{{employee.last_name}}</td>
+      <td>{{employee.first_name}}</td>
+      <td>{{employee.patronymic}}</td>
+      <td>{{employee.bday}}</td>
+      <td>{{employee.inn}}</td>
+      <td>{{employee.degree}}</td>
+      <td>{{employee.adress}}</td>
+      <td>+7{{employee.phone}}</td>
+      <td>{{employee.snils}}</td>
+      <td>{{employee.passport_num}}</td>
+      <td>{{employee.passport_date}}</td>
+      <td>
+          <form id="f" method="post" align="center"  action="get_vacation" >
+              {% csrf_token %}
+              <input name="name" type="hidden" value={{ employee.last_name }}>
+              <input name="vacation" type="hidden" value={{ org.name }}>
+              <button type="submit" class="btn btn-dark" style="width:150px">Отпуск</button>
+          </form>
+      </td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}

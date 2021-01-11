@@ -1,0 +1,36 @@
+{% extends 'organisations\base.html' %}
+
+{% block title %}
+    Vacation list
+{% endblock %}
+
+{% block content %}
+<table class="table table-hover table-light table-bordered">
+  <nav class="navbar" style="background-color: black; opacity: 0.6;">
+  <h2 style="color: white;"><i>Планирование отпусков сотрудников организации</i></h2>
+  </nav>
+  <thead class="table-light" style="background-color: rgba(235,205,169,0.51)">
+    <tr align="left">
+      <th scope="col">#</th>
+      <th scope="col">Начало отпуска</th>
+      <th scope="col">Конец отпуска</th>
+      <th scope="col">Тип отпуска</th>
+      <th scope="col">Статус отпуска</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for vacation in org.vacation %}
+    <tr>
+      <th scope="row" href="#">#</th>
+      <td>{{vacation.fday}}</td>
+      <td>{{vacation.lday}}</td>
+      <td>{{vacation.absence_type}}</td>
+      <td>{{vacation.status}}</td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}

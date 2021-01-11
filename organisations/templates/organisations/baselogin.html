@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Организация</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+</head>
+
+<style>
+    body{
+        background: url({% static 'images/1.jpg' %}) no-repeat;
+        background-size: cover;
+    }
+</style>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(235,205,169,1)">
+  <a class="navbar-brand" href="#">Vacation planning system</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+        <div class="collapse navbar-collapse" id="navbar1">
+            <form id="f" method="post" action="">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-dark">На главную страницу</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        {% block content %}
+            There is not any content
+        {% endblock %}
+    </div>
+
+</body>
+</html>
